@@ -15,7 +15,7 @@ export const eventCreateController = (
 
   if (image) {
     const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
-    fs.writeFile(`uploads/${fileName}`, base64Data, "base64", (err) => {
+    fs.writeFile(`public/uploads/${fileName}`, base64Data, "base64", (err) => {
       if (err) {
         console.log(err);
         res.status(500).send({ message: "Error al guardar la imagen" });

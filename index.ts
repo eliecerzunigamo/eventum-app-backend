@@ -25,8 +25,8 @@ app.use((req, res, next) => {
   res.header("Allow", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
-app.use(express.static(path.join(__dirname, 'uploads')));
-app.set('uploads', path.join(__dirname, 'uploads'))
+
+app.use(express.static('public'))
 
 app.use("/api", publicRoutes);
 app.use("/api", auth, privateRoutes);
