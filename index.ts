@@ -24,6 +24,7 @@ app.use((req, res, next) => {
   res.header("Allow", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
+app.use(express.static("uploads"));
 
 app.use("/api", publicRoutes);
 app.use("/api", auth, privateRoutes);
