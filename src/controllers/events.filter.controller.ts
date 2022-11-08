@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Event } from "../models";
 import { EventSchema } from "../models/eventModel";
-import { Faculty } from '../models/facModel';
+import { Faculty } from "../models/facModel";
 
 export const eventFilterController = async (
   req: Request<
@@ -18,18 +18,20 @@ export const eventFilterController = async (
 ) => {
   const { faculty_id, program_id } = req.query;
 
-  const faculties = await Faculty.find({})
+  const faculties = await Faculty.find({});
 
-  const faculty = faculties.find((faculty : any) => faculty._id == faculty_id);
+  const faculty = faculties.find((faculty: any) => faculty._id == faculty_id);
 
-  if(!faculty){
+  if (!faculty) {
     return res.status(400).json({ message: "Esta facultad no existe" });
   }
 
-  if(program_id){
-    const program = faculty?.programs.find((program) => program.id == program_id);
+  if (program_id) {
+    const program = faculty?.programs.find(
+      (program) => program.id == program_id
+    );
 
-    if(!program){
+    if (!program) {
       return res.status(400).json({ message: "Este programa no existe" });
     }
 
@@ -47,7 +49,6 @@ export const eventFilterController = async (
       }
     );
   }
- 
 
   if (faculty && !program_id) {
     Event.find(
@@ -63,6 +64,4 @@ export const eventFilterController = async (
       }
     );
   }
-
-
 };

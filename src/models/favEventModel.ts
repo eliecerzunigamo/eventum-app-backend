@@ -6,8 +6,12 @@ export interface FavEventSchema {
 }
 
 export const favEventSchema = new mongoose.Schema({
-    event_id: String,
-    user_id: String,
+  event_id: String,
+  user_id: String,
 });
 
-export const FavEvent = mongoose.model("FavEvent", favEventSchema, "favorite_events_by_user");
+export const FavEvent = mongoose.model(
+  "FavEvent",
+  favEventSchema,
+  "favorite_events_by_user"
+);

@@ -6,22 +6,20 @@ export const addEventToFavoriteController = async (
   res: Response,
   next: NextFunction
 ) => {
-  
-  
   const { event_id } = req.body;
   const { _id } = req.user.user;
 
-    const favEvent = new FavEvent({
-        event_id,
-        user_id : _id,
-    });
+  const favEvent = new FavEvent({
+    event_id,
+    user_id: _id,
+  });
 
-    favEvent.save()
+  favEvent
+    .save()
     .then((favEvent) => {
-        res.status(201).json(favEvent);
+      res.status(201).json(favEvent);
     })
     .catch((err) => {
-        res.status(400).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     });
-
 };

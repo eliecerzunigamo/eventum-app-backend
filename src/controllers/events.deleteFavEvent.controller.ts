@@ -7,9 +7,7 @@ export const deleteFavEventController = async (
   res: Response,
   next: NextFunction
 ) => {
-  
   const favEvents = await FavEvent.deleteOne({ event_id: req.query.event_id });
 
   res.status(200).json({ favEvents });
-
 };

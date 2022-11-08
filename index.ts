@@ -1,13 +1,10 @@
 import express from "express";
-import { config } from "./config";
-import { connect } from "./db";
+import { config } from "./src/config";
+import { connect } from "./src/db";
 import cors from "cors";
-import publicRoutes from "./routes/publicRoutes";
-import privateRoutes from "./routes/privateRoutes";
-import auth from "./middlewares/auth";
-import { User } from './models/userModel';
-import { Roles } from './utils/enums';
-import { encrypt } from './utils/encrypt';
+import publicRoutes from "./src/routes/publicRoutes";
+import privateRoutes from "./src/routes/privateRoutes";
+import auth from "./src/middlewares/auth";
 
 const app = express();
 
