@@ -26,6 +26,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.static(path.join(__dirname, 'uploads')));
+app.set('uploads', path.join(__dirname, 'uploads'))
 
 app.use("/api", publicRoutes);
 app.use("/api", auth, privateRoutes);
