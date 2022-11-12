@@ -30,7 +30,12 @@ export const userLoginController = (
           config.jwt!,
           {}
         );
-        res.status(200).send({ token });
+        res.status(200).send({ token, user: {
+          email: user._doc.email,
+          name: user._doc.name,
+          user_type: user._doc.user_type,
+          
+        } });
       }
     }
   );
