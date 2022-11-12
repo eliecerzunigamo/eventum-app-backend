@@ -19,7 +19,7 @@ export const userLoginController = (
         res.status(400).json({
           message:"Usuario no encontrado"
         });
-      } else if (await compare(req.body.password, user._doc.password)) {
+      } else if (!(await compare(req.body.password, user._doc.password))) {
         res.status(400).send({
           message:"El usuario y la contraseña no coinciden"
         });
