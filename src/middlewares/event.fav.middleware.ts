@@ -16,7 +16,7 @@ export const addEventToFavoriteMiddleware = async (
   const favEvents = await FavEvent.find();
 
   const favEvent = favEvents.find(
-    (favEvent: any) => favEvent.event_id == event_id
+    (favEvent: any) => (favEvent.event_id == event_id && favEvent.user_id == req.user.user._id)
   );
 
   if (favEvent) {

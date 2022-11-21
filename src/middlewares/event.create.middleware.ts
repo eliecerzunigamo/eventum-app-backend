@@ -22,7 +22,7 @@ export const createEventMiddleware = async (
       .send({ message: "Por favor ingrese todos los campos" });
   }
 
-  if (!/^[\s\S]{3,20}$/.test(title)) {
+  if (!/^[\s\S]{3,50}$/.test(title)) {
     return res
       .status(400)
       .send({ message: "El título debe tener entre 3 y 20 caracteres" });
@@ -40,26 +40,10 @@ export const createEventMiddleware = async (
       .send({ message: "La fecha debe tener un formato aaaa-mm-dd" });
   }
 
-  if (
-    !(
-      new Date(date).getDate() >= new Date().getDate() ||
-      new Date(date).getMonth() >= new Date().getMonth() ||
-      new Date(date).getFullYear() >= new Date().getFullYear()
-    )
-  ) {
-    return res
-      .status(400)
-      .send({ message: "La fecha debe ser mayor a la fecha actual" });
-  }
-
   if (!/^(\d{2}:)+(\d{2})$/.test(time)) {
     return res
       .status(400)
       .send({ message: "La hora debe tener un formato hh:mm" });
-  }
-
-  if (!(new Date(date + "T" + time) >= new Date())) {
-    return res.status(400).send({ message: "La hora no es válida" });
   }
 
   const facs = await Faculty.find({});

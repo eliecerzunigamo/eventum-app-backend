@@ -17,11 +17,11 @@ export const userLoginController = (
         res.status(500).send(err);
       } else if (!user) {
         res.status(400).json({
-          message:"Usuario no encontrado"
+          message: "Usuario no encontrado",
         });
       } else if (!(await compare(req.body.password, user._doc.password))) {
         res.status(400).send({
-          message:"El usuario y la contraseña no coinciden"
+          message: "El usuario y la contraseña no coinciden",
         });
       } else {
         const token = jwt.sign(
@@ -34,12 +34,13 @@ export const userLoginController = (
           config.jwt!,
           {}
         );
-        res.status(200).send({ token, user: {
-          email: user._doc.email,
-          name: user._doc.name,
-          user_type: user._doc.user_type,
-          
-        } });
+        res.status(200).send({
+          token,
+          user:{
+             ...user._doc,
+             password: '*******'
+          },
+        });
       }
     }
   );

@@ -22,4 +22,7 @@ export const eventSchema = new mongoose.Schema({
   time: String,
 });
 
+eventSchema.index({ title: "text", description: "text" });
+
 export const Event = mongoose.model("Event", eventSchema, "events");
+

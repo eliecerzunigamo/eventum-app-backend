@@ -6,12 +6,13 @@ import publicRoutes from "./src/routes/publicRoutes";
 import privateRoutes from "./src/routes/privateRoutes";
 import auth from "./src/middlewares/auth";
 import path from "path";
+import bodyParser from "body-parser";
 
 const app = express();
 
 connect();
 app.set("jwt", config.jwt);
-
+app.use(bodyParser({limit: '50mb'}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -26,7 +27,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static('public'))
+app.use(express.static("public"));
 
 app.use("/api", publicRoutes);
 app.use("/api", auth, privateRoutes);

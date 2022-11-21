@@ -1,7 +1,6 @@
 import express from "express";
 import { eventCreateController } from "../controllers/events.create.controller";
 import { createEventMiddleware } from "../middlewares/event.create.middleware";
-import { eventFilterController } from "../controllers/events.filter.controller";
 import { facultiesGetAllController } from "../controllers/events.faculties.controller";
 import { addEventToFavoriteMiddleware } from "../middlewares/event.fav.middleware";
 import { addEventToFavoriteController } from "../controllers/events.addFav.controller";
@@ -12,13 +11,7 @@ import { deleteFavEventController } from "../controllers/events.deleteFavEvent.c
 const app = express();
 
 app.post("/create", createEventMiddleware, eventCreateController);
-app.get(
-  "/filter",
-  (_, __, next) => {
-    next();
-  },
-  eventFilterController
-);
+
 app.get(
   "/all-faculties",
   (_, __, next) => {
@@ -28,7 +21,7 @@ app.get(
 );
 
 app.post(
-  "/add-fav-event",
+  "/fav-events",
   addEventToFavoriteMiddleware,
   addEventToFavoriteController
 );
