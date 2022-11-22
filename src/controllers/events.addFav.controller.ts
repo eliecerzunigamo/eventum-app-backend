@@ -41,7 +41,12 @@ export const addEventToFavoriteController = async (
 
   admin.messaging()
     .sendToDevice(token,
-    payload)
+    payload).then((response) => {
+      console.log(response);
+    }).catch((error) => {
+      console.log(error);
+    }
+    );
   }, new Date(date + adjust).getTime() - new Date().getTime());
 
   favEvent
