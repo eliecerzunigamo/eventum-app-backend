@@ -45,9 +45,9 @@ export const getFavEventsController = async (
       _id: { $in: favEvents.map((favEvent) => favEvent.event_id) },
     })
       .limit(size)
-      .skip(size * (page - 1))
+      .skip(size * (page - 1)).sort({createdAt: -1})
       .then((events) => {
-        return res.status(200).json(events);
+        return res.status(200).json(events.sort((a, b) => new Date(b.created_at!).getTime() - new Date(a.created_at!).getTime()))
       });
 
   }
@@ -66,9 +66,9 @@ export const getFavEventsController = async (
         title: { $regex: query , $options: 'i'},
         _id: { $in: favEvents.map((favEvent) => favEvent.event_id) },
       }).limit(size)
-      .skip(size * (page - 1))
+      .skip(size * (page - 1)).sort({createdAt: -1})
       .then((events) => {
-        return res.status(200).json(events);
+        return res.status(200).json(events.sort((a, b) => new Date(b.created_at!).getTime() - new Date(a.created_at!).getTime()))
       });
 
   }
@@ -97,9 +97,9 @@ export const getFavEventsController = async (
         title: { $regex: query , $options: 'i'},
         _id: { $in: favEvents.map((favEvent) => favEvent.event_id) },
       }).limit(size)
-      .skip(size * (page - 1))
+      .skip(size * (page - 1)).sort({createdAt: -1})
       .then((events) => {
-        return res.status(200).json(events);
+        return res.status(200).json(events.sort((a, b) => new Date(b.created_at!).getTime() - new Date(a.created_at!).getTime()))
       });
   }
 

@@ -29,6 +29,7 @@ export const eventCreateController = (
     ...req.body,
     date: localDate,
     time: localTime,
+    created_at: new Date().toISOString(),
     image_path: image ? `${fileName}` : null,
   });
   event

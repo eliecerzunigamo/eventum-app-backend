@@ -35,7 +35,7 @@ export const eventGetAllController = async (
       }).limit(size)
       .skip(size * (page - 1))
       .then((events) => {
-        return res.status(200).json(events);
+        return res.status(200).json(events.sort((a, b) => new Date(b.created_at!).getTime() - new Date(a.created_at!).getTime()))
       });
   }
 
@@ -64,7 +64,7 @@ export const eventGetAllController = async (
       }).limit(size)
       .skip(size * (page - 1))
       .then((events) => {
-        return res.status(200).json(events);
+        return res.status(200).json(events.sort((a, b) => new Date(b.created_at!).getTime() - new Date(a.created_at!).getTime()))
       });
   }
 
@@ -78,7 +78,7 @@ export const eventGetAllController = async (
       .limit(size)
       .skip(size * (page - 1))
       .then((events) => {
-        return res.status(200).json(events);
+        return res.status(200).json(events.sort((a, b) => new Date(b.created_at!).getTime() - new Date(a.created_at!).getTime()))
       });
   }
 

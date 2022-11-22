@@ -9,6 +9,7 @@ export interface EventSchema {
   prog: string;
   date: string;
   time: string;
+  created_at: string;
   image?: string;
 }
 
@@ -19,6 +20,7 @@ export const eventSchema = new mongoose.Schema({
   fac: String,
   prog: String,
   date: String,
+  created_at: String,
   time: String,
 });
 
