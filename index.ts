@@ -7,10 +7,12 @@ import privateRoutes from "./src/routes/privateRoutes";
 import auth from "./src/middlewares/auth";
 import bodyParser from "body-parser";
 import admin from 'firebase-admin'
+import * as serviceAccount from './key/firebase.json'
+
 const app = express();
 
 admin.initializeApp({
-  credential: admin.credential.cert(config.firebase!),
+  credential: admin.credential.cert(serviceAccount as any),
 });
 
 connect();
