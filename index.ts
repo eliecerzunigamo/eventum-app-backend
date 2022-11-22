@@ -5,10 +5,13 @@ import cors from "cors";
 import publicRoutes from "./src/routes/publicRoutes";
 import privateRoutes from "./src/routes/privateRoutes";
 import auth from "./src/middlewares/auth";
-import path from "path";
 import bodyParser from "body-parser";
-
+import admin from 'firebase-admin'
 const app = express();
+
+admin.initializeApp({
+  credential: admin.credential.cert(config.firebase!),
+});
 
 connect();
 app.set("jwt", config.jwt);
