@@ -7,7 +7,7 @@ export const eventCreateController = (
   res: Response,
   next: NextFunction
 ) => {
-  const { image } = req.body;
+  const { image, date } = req.body;
 
   const imagePath = image?.split("data:image/")[1].split(";")[0];
   const id = Math.random().toString(36).substring(2, 9);
@@ -22,8 +22,13 @@ export const eventCreateController = (
       }
     });
   }
+  const adjustedDate = new Date(new Date(date).getTime() - 1000 * 60 * 60 * 5);
+  const localDate = adjustedDate.toJSON().split("T")[0];
+  const localTime = adjustedDate.toJSON().split("T")[1].split(".")[0].slice(0, 5);
   const event = new Event({
     ...req.body,
+    date: localDate,
+    time: localTime,
     image_path: image ? `${fileName}` : null,
   });
   event

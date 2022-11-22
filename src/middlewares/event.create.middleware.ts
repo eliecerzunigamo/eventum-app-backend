@@ -16,7 +16,7 @@ export const createEventMiddleware = async (
     return;
   }
 
-  if (!title || !date || !description || !fac || !prog || !time) {
+  if (!title || !date || !description || !fac || !prog ) {
     return res
       .status(400)
       .send({ message: "Por favor ingrese todos los campos" });
@@ -34,17 +34,12 @@ export const createEventMiddleware = async (
       .send({ message: "El título debe tener entre 3 y 500 caracteres" });
   }
 
-  if (!/^(\d{4}-)+(\d{2}-)+(\d{2})$/.test(date)) {
+  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(date)) {
     return res
       .status(400)
-      .send({ message: "La fecha debe tener un formato aaaa-mm-dd" });
+      .send({ message: "La fecha debe tener un formato aaaa/mm/ddThh:mm:ss.mssZ" });
   }
 
-  if (!/^(\d{2}:)+(\d{2})$/.test(time)) {
-    return res
-      .status(400)
-      .send({ message: "La hora debe tener un formato hh:mm" });
-  }
 
   const facs = await Faculty.find({});
 
