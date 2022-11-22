@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
+    "postbuild": "mv ./key/firebase.json ./dist/key",
     "start": "node dist/index.js &&  serve -s build/uploads",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
     "pretty": "prettier --write \"./**/*.{js,jsx,json,ts,tsx}\""
