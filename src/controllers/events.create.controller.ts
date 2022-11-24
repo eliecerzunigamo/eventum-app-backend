@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { Event, EventSchema } from "../models";
 import fs from "fs";
+import admin from 'firebase-admin'
+import { ConditionMessage } from 'firebase-admin/lib/messaging/messaging-api';
 
 export const eventCreateController = (
   req: Request<{}, {}, EventSchema, {}>,
@@ -25,6 +27,11 @@ export const eventCreateController = (
   const adjustedDate = new Date(new Date(date).getTime() - 1000 * 60 * 60 * 5);
   const localDate = adjustedDate.toJSON().split("T")[0];
   const localTime = adjustedDate.toJSON().split("T")[1].split(".")[0].slice(0, 5);
+ 
+  const timer = new Date(new Date(date).getTime() - 1000*60*30).getTime() - new Date().getTime()
+
+  
+
   const event = new Event({
     ...req.body,
     date: localDate,
@@ -36,6 +43,24 @@ export const eventCreateController = (
     .save()
     .then((event) => {
       res.status(201).json(event);
+      setTimeout(() => {
+        const payload = {
+          notification: {
+            title: req.body.title,
+            body: "Este evento esta a punto de comenzar",
+          },
+        };
+    
+      admin.messaging()
+        .sendToTopic("e"+event._id,
+        payload).then((response) => {
+          console.log(response);
+        }).catch((error) => {
+          console.log(error);
+        }
+        );
+      }, timer);
+    
     })
     .catch((err) => {
       res.status(400).json({ message: err.message });
