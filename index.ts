@@ -6,8 +6,8 @@ import publicRoutes from "./src/routes/publicRoutes";
 import privateRoutes from "./src/routes/privateRoutes";
 import auth from "./src/middlewares/auth";
 import bodyParser from "body-parser";
-import admin from 'firebase-admin'
-import * as serviceAccount from './key/firebase.json'
+import admin from "firebase-admin";
+import * as serviceAccount from "./key/firebase.json";
 
 const app = express();
 
@@ -17,7 +17,7 @@ admin.initializeApp({
 
 connect();
 app.set("jwt", config.jwt);
-app.use(bodyParser({limit: '50mb'}));
+app.use(bodyParser({ limit: "50mb" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());

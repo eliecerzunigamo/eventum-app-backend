@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { FavEvent } from "../models/favEventModel";
 import { Event } from "../models/eventModel";
 import { FavEventRequest } from "../controllers/events.addFav.controller";
+import { ScheduledEvent } from "../models/scheduledEventModel";
 
-export const addEventToFavoriteMiddleware = async (
+export const addEventToScheduleMiddleware = async (
   req: Request<{}, {}, FavEventRequest, {}>,
   res: Response,
   next: NextFunction
@@ -18,17 +18,18 @@ export const addEventToFavoriteMiddleware = async (
 
   const event = events.find((event: any) => event._id == event_id);
 
-  const favEvents = await FavEvent.find();
+  const scheduledEvents = await ScheduledEvent.find();
 
-  const favEvent = favEvents.find(
-    (favEvent: any) =>
-      favEvent.event_id == event_id && favEvent.user_id == req.user.user._id
+  const scheduledEvent = scheduledEvents.find(
+    (scheduledEvents: any) =>
+      scheduledEvents.event_id == event_id &&
+      scheduledEvents.user_id == req.user.user._id
   );
 
-  if (favEvent) {
+  if (scheduledEvent) {
     return res
       .status(400)
-      .json({ message: "Este evento ya fue añadido a favoritos" });
+      .json({ message: "Este evento ya fue añadido a agendados" });
   }
 
   if (!event) {

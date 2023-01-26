@@ -6,9 +6,10 @@ export type program = keyof typeof Programs;
 
 export enum Roles {
   Student = "estudiante",
-  Teacher = "profesor",
-  Employee = "funcionario",
+  Teacher = "docente",
+  Professional = "profesional",
   Director = "director de programa",
+  Other = "otro",
 }
 
 export type roles = keyof typeof Roles;

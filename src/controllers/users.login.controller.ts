@@ -36,9 +36,9 @@ export const userLoginController = (
         );
         res.status(200).send({
           token,
-          user:{
-             ...user._doc,
-             password: '*******'
+          user: {
+            ...user._doc,
+            password: "*******",
           },
         });
       }

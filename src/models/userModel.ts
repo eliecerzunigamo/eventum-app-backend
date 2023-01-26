@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
-import { Roles } from "../utils/enums";
+import { UserType } from "../middlewares/user.register.middleware";
 
 export interface UserSchema {
   _doc: {
-    email: string;
-    password: string;
     name: string;
-    user_type: Roles;
-    fac: string;
-    program: string;
+    email: string;
+    user_type: UserType;
+    password: string;
+    phone: number;
+    age: number;
   };
 }
 
@@ -17,8 +17,8 @@ export const userSchema = new mongoose.Schema({
   password: String,
   name: String,
   user_type: String,
-  fac: String,
-  program: String,
+  phone: String,
+  age: String,
 });
 
 export const User = mongoose.model("User", userSchema, "users");

@@ -8,6 +8,5 @@ export const config = {
   secret: process.env.SECRET,
   saltRounds: process.env.SALT,
   jwt: process.env.JWT,
-  firebase: process.env.GOOGLE_APPLICATION_CREDENTIALS
-
+  firebase: process.env.GOOGLE_APPLICATION_CREDENTIALS,
 };
