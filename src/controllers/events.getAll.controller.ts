@@ -14,12 +14,13 @@ export const eventGetAllController = async (
       program_id?: string;
       query?: string;
       my_events?: boolean;
+      event_type?: string;
     }
   >,
   res: Response,
   next: NextFunction
 ) => {
-  const { size = 20, page = 1, faculty_id, program_id, query = "", my_events = false } = req.query;
+  const { size = 20, page = 1, faculty_id, program_id, query = "", my_events = false,event_type } = req.query;
 
   const faculty = await Faculty.findOne({
     _id: faculty_id,
@@ -39,6 +40,9 @@ export const eventGetAllController = async (
           $exists: true,
         },
     creator_id: my_events ? req.user.user.email : {
+      $exists: true,
+    },
+    event_type: event_type ? event_type : {
       $exists: true,
     },
     title: { $regex: query, $options: "i" },

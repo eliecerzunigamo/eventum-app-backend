@@ -13,12 +13,13 @@ export const eventGetAllMiddleware = async (
       faculty_id?: string;
       program_id?: string;
       query?: string;
+      event_type?: string;
     }
   >,
   res: Response,
   next: NextFunction
 ) => {
-  const { size = 20, page = 1, faculty_id, program_id, query = "" } = req.query;
+  const { size = 20, page = 1, faculty_id, program_id, query = "",event_type } = req.query;
 
   if (page < 1) {
     return res.status(400).send("El numero pagina debe ser mayor a cero 0");
@@ -40,6 +41,12 @@ export const eventGetAllMiddleware = async (
       if (!program) {
         return res.status(400).json({ message: "Este programa no existe" });
       }
+    }
+  };
+
+  if(event_type){
+    if(event_type != 'event' && event_type != 'new'){
+      return res.status(400).json({ message: "Este tipo de evento no existe" });
     }
   }
 
