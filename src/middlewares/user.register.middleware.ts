@@ -20,7 +20,7 @@ export interface UserToRegister {
 
 export const phoneValidate = (phone: string) => /^\d{10}$/.test(phone);
 export const ageValidate = (age: string) => /^\d{1,3}$/.test(age);
-export const nameValidate = (name: string) => /^[a-zA-Z\s]{3,50}$/.test(name);
+export const nameValidate = (name: string) => /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{3,50}$/.test(name);
 
 export const userRegisterMiddleware = async (
   req: Request<{}, {}, UserToRegister, {}>,
